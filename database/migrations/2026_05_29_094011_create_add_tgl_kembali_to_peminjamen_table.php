@@ -6,24 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::table('peminjamen', function (Blueprint $table) {
+        Schema::table('peminjamans', function (Blueprint $table) {
 
             $table->date('tgl_kembali')->after('tgl_pinjam');
 
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::table('peminjamen', function (Blueprint $table) {
+        Schema::table('peminjamans', function (Blueprint $table) {
 
             $table->dropColumn('tgl_kembali');
 
