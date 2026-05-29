@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string('status')->default('Dipinjam');
             $table->timestamps();
         });
-    }
+    }   
 
     public function down(): void {
         Schema::dropIfExists('peminjamans');
