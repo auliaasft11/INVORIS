@@ -4,62 +4,47 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BarangController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $barangs = Barang::all();
+        return view('barang.index', compact('barangs'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        // PROTEKSI: Cek apakah yang login adalah admin
+        if (Auth::user()->email !== 'admin@gmail.com') {
+            return redirect()->back()->with('error', 'Akses Ditolak! Hanya Admin yang boleh menambah barang.');
+        }
+
+        $request->validate([
+            'kode_barang' => 'required|unique:barangs',
+            'nama_barang' => 'required',
+            'kategori'    => 'required',
+            'stok'        => 'required|numeric',
+            'kondisi'     => 'required',
+            'lokasi'      => 'required',
+        ]);
+
+        Barang::create($request->all());
+
+        return redirect()->back()->with('success', 'Barang berhasil ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Barang $barang)
+    public function destroy($id)
     {
-        //
-    }
+        // PROTEKSI: Cek apakah yang login adalah admin
+        if (Auth::user()->email !== 'admin@gmail.com') {
+            return redirect()->back()->with('error', 'Akses Ditolak! Hanya Admin yang boleh menghapus barang.');
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Barang $barang)
-    {
-        //
-    }
+        $barang = Barang::findOrFail($id);
+        $barang->delete();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Barang $barang)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Barang $barang)
-    {
-        //
+        return redirect()->back()->with('success', 'Barang berhasil dihapus!');
     }
 }
