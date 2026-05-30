@@ -11,7 +11,7 @@
         </h2>
 
         <p class="text-muted small">
-            Daftar inventaris barang HIMSI
+            Daftar inventaris barang HMSI
         </p>
 
     </div>
