@@ -14,26 +14,29 @@ class BarangController extends Controller
         return view('barang.index', compact('barangs'));
     }
 
-    public function store(Request $request)
-    {
-        // PROTEKSI: Cek apakah yang login adalah admin
-        if (Auth::user()->email !== 'admin@gmail.com') {
-            return redirect()->back()->with('error', 'Akses Ditolak! Hanya Admin yang boleh menambah barang.');
-        }
-
-        $request->validate([
-            'kode_barang' => 'required|unique:barangs',
-            'nama_barang' => 'required',
-            'kategori'    => 'required',
-            'stok'        => 'required|numeric',
-            'kondisi'     => 'required',
-            'lokasi'      => 'required',
-        ]);
-
-        Barang::create($request->all());
-
-        return redirect()->back()->with('success', 'Barang berhasil ditambahkan!');
+public function store(Request $request)
+{
+    // PROTEKSI: Cek apakah yang login adalah admin
+    if (Auth::user()->email !== 'admin@gmail.com') {
+        return redirect()->back()->with('error', 'Akses Ditolak! Hanya Admin yang boleh menambah barang.');
     }
+
+    // TAMBAHKAN INI
+    dd($request->all());
+
+    $request->validate([
+        'kode_barang' => 'required|unique:barangs',
+        'nama_barang' => 'required',
+        'kategori'    => 'required',
+        'stok'        => 'required|numeric',
+        'kondisi'     => 'required',
+        'lokasi'      => 'required',
+    ]);
+
+    Barang::create($request->all());
+
+    return redirect()->back()->with('success', 'Barang berhasil ditambahkan!');
+}
 
     public function destroy($id)
     {
