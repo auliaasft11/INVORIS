@@ -30,7 +30,6 @@ public function store(Request $request)
         'kategori'    => 'required',
         'stok'        => 'required|numeric',
         'kondisi'     => 'required',
-        'lokasi'      => 'required',
     ]);
 
     Barang::create($request->all());
