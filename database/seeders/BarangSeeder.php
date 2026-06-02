@@ -15,7 +15,6 @@ class BarangSeeder extends Seeder
             'kategori' => 'Elektronik',
             'stok' => 3,
             'kondisi' => 'Ready',
-            'lokasi' => 'Gudang',
         ]);
 
         Barang::create([
@@ -24,7 +23,6 @@ class BarangSeeder extends Seeder
             'kategori' => 'Elektronik',
             'stok' => 5,
             'kondisi' => 'Ready',
-            'lokasi' => 'Gudang',
         ]);
     }
 }
