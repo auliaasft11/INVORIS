@@ -22,8 +22,6 @@ public function store(Request $request)
     }
 
     // TAMBAHKAN INI
-    dd($request->all());
-
     $request->validate([
         'kode_barang' => 'required|unique:barangs',
         'nama_barang' => 'required',
