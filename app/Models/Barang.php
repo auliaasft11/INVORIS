@@ -16,7 +16,6 @@ class Barang extends Model
         'nama_barang', 
         'kategori', 
         'stok', 
-        'kondisi', // Ini kolom status di database kamu
-        'lokasi'
+        'kondisi' // Ini kolom status di database kamu
     ];
 }
